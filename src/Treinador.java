@@ -5,13 +5,13 @@ public class Treinador {
 	Pokemon [] pokes = new Pokemon[6];
 	int index = 0;
 	
+	Item [] itens = new Item[100];
+	int indexItem = 0;
+		
 	Treinador (String nome) {
 		this.nome = nome;
 		
-	}
-	
-	Item [] itens = new Item[100];
-	int indexItem = 0;
+	}	
 	
 	public void addPoke (int indexPokeBanco) {
 		if (index <= 6) {
@@ -35,11 +35,33 @@ public class Treinador {
 		}
 	}
 	
-	public int useItem (int indexItem) {
-		if (itens[indexItem].isUsed == true) return -1;
+	
+	public int useItem (int indexItem) { //tornei as variaveis privadas em Item, assim so da para acessar valores por metodos 
+		if (itens[indexItem].canUse() == false) return -1;
 		
-		pokes[1].pVida += itens[indexItem].valCura;
-		itens[indexItem].isUsed = true;
+		pokes[1].pVida += itens[indexItem].use();
+		itens[indexItem].subtract();
+		
 		return 1;
+	}
+	
+	public void defineNumItem (int indexItem, int qtd) {
+		itens[indexItem].defineNumItens(qtd);
+	}
+	
+	//alterar pokemon principal. Retorna true quando a troca foi efetuada
+	public boolean alteraPokePrincipal (int indexPoke) {
+		
+		if (pokes[indexPoke].isAlive == true) { //criar metodo para retornar isAlive, quando mudar para private
+			int [] vecInt = {};
+			Pokemon e = new Pokemon("","", 1, vecInt);
+			e = pokes[1];
+			pokes[1] = pokes[indexPoke];
+			pokes[indexPoke] = e;
+			
+			return true;
+		}
+		
+		return false;
 	}
 }
