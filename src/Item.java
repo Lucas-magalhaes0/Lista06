@@ -45,5 +45,10 @@ public class Item {
 			this.qtd--;
 		}
 	}	
+	
+	public void dados () {
+		System.out.println("Item: " + nome);
+		System.out.println("Recupera :" + valCura + " PV");
+	}
 }
 

@@ -1,5 +1,4 @@
-
-public class Banco {
+class Banco {
 	//hab e dano
 	static String [] nomeHab = new String[100];
 	static int [] valAtk = new int[100];
@@ -18,17 +17,17 @@ public class Banco {
 		if (indexHabAtk > 100) return;
 		
 		Banco.nomeHab[indexHabAtk] = nome;
-		Banco.valAtk[indexHabAtk] = valAtk;
-		indexHabAtk++;
-		
+		Banco.valAtk[indexHabAtk++] = valAtk;		
 	}
 	
-	public void addPoke (String nome, String tipo, int [] HabAtk, int pVida) {
+	
+	public void addPoke (String nome, String tipo, int [] Golpes, int pVida) {
 		if (indexPoke > 100) return;
 		
-		Pokemon e = new Pokemon(nome, tipo, pVida, HabAtk);
+		Pokemon e = new Pokemon(nome, tipo, pVida, Golpes);
 		
-		Banco.poke[indexPoke++] = e;
+		
+		poke[indexPoke++] = e;
 	}
 	
 	public void addItens (String nomeItem, int valCura) {
