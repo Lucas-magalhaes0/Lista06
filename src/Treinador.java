@@ -1,5 +1,5 @@
 
-public class Treinador {
+public class Treinador extends TreinadorEsqueleto {
 	String nome;	
 	
 	Pokemon [] pokes = new Pokemon[6];
@@ -7,21 +7,26 @@ public class Treinador {
 	
 	Item [] itens = new Item[100];
 	int indexItem = 0;
-		
-	Treinador (String nome) {
+	
+	boolean ehTreinador;
+	
+	Treinador (String nome, boolean EhTreinador) {
 		this.nome = nome;
-		
+		ehTreinador = EhTreinador;
 	}	
 	
-	public void addPoke (int indexPokeBanco) {
+	public void addPoke (Pokemon e) {
 		if (index <= 6) {
-			pokes[index++] = Banco.poke[indexPokeBanco];			
+			pokes[index++] = e;			
 		}
 	}
 	
+	public int getPokeN(){
+		return index-1;
+	}
 	public boolean estaNoJogo () {
-		for (Pokemon poke : pokes) {
-			if (poke.isAlive) {
+		for (int npoke = 0; npoke < index; npoke++) {
+			if (pokes[npoke].isAlive) {
 				return true;
 			}
 		}
@@ -51,47 +56,16 @@ public class Treinador {
 	}
 	
 	//alterar pokemon principal. Retorna true caso a troca for efetuada com sucesso
-	public boolean alteraPokePrincipal (int indexPoke) {
-		
+	
+	
+	public void alteraPokePrincipal (int indexPoke) {
 		if (pokes[indexPoke].isAlive == true) { //criar metodo para retornar isAlive, quando mudar para private
 			int [] vecInt = {};
 			Pokemon e = new Pokemon("","", 1, vecInt); //aqui deveria ser static, mas o eclipse nao aceita (?)
-			e = pokes[1];
-			pokes[1] = pokes[indexPoke];
+			e = pokes[0];
+			pokes[0] = pokes[indexPoke];
 			pokes[indexPoke] = e;
 			
-			return true;
 		}
-		
-		return false;
-	}
-	
-	//imprime dados sobre pokemons
-	public void dados () {
-		for (int i = 0; i <= 0; i++ ) {
-			System.out.println("Indice do Pokemon: " + i);
-			pokes[i].dados();
-			for (int j = 0; j < (pokes[i].golpes).length; j++) {
-				//Banco.indexHabAtk; // ************** como acessar o banco a partir de um metodo? *************
-			}
-		}
-	}
-	
-	public static void main (String [] args) {
-		Treinador ash = new Treinador("Ash");
-		Banco bank = new Banco();
-		
-		int [] a= {0, 1};
-		bank.addPoke("Pikachu", "Eletrico", a, 100);
-		bank.addHabAtk("Choque do Trovao", 60);
-		bank.addHabAtk("Para raios", 0);
-		
-		ash.addPoke(0);
-		
-		ash.dados();		
-		System.out.println(Banco.nomeHab[0]); // como acessar o banco a partir de um metodo?
-		System.out.println(Banco.valAtk[0]);
-		System.out.println(Banco.nomeHab[1]); 
-		System.out.println(Banco.valAtk[1]);
 	}
 }
