@@ -28,7 +28,7 @@ public class BatalhaPokemon extends EventBattle {
 			super(3,false);
 		}
 		public Treinador action(Treinador a, Treinador b){
-			a.useItem(0);
+			a.useItem(0, 0);
 			return a;
 		}
 		public void descricao(Treinador a, Treinador b){

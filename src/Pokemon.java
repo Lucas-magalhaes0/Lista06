@@ -91,6 +91,9 @@ public class Pokemon {
 			Treinador PokemonSelvagem = new Treinador("",false);
 			PokemonSelvagem.addPoke(Banco.pokes[randomPokes]);
 			gc.run(Ash, PokemonSelvagem);
+			
+			
+			/*recupera o hp do pokemon que morreu, para nao ficar nula no banco*/
 			PokemonSelvagem.pokes[0].isAlive = true;
 			PokemonSelvagem.pokes[0].pVida = PokemonSelvagem.pokes[0].pVidaMax;
 		}

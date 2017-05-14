@@ -42,30 +42,33 @@ public class Treinador extends TreinadorEsqueleto {
 	
 	/* usa item no pokes[0]
 	 * tornei as variaveis privadas em Item, assim so da para acessar valores por metodos */
-	public int useItem (int indexItem) {  
-		if (itens[indexItem].canUse() == false) return -1;
+	public void useItem (int indexPoke, int indexItem) {  
+		pokes[indexPoke].pVida += itens[indexItem].use();
 		
-		pokes[1].pVida += itens[indexItem].use();
-		itens[indexItem].subtract();
-		
-		return 1;
+		if(pokes[indexPoke].pVida > pokes[indexPoke].pVidaMax)
+			pokes[indexPoke].pVida = pokes[indexPoke].pVidaMax;
 	}
 	
-	public void defineNumItem (int indexItem, int qtd) {
-		itens[indexItem].defineNumItens(qtd);
-	}
-	
-	//alterar pokemon principal. Retorna true caso a troca for efetuada com sucesso
-	
-	
+		
+	//alterar pokemon principal. Retorna true caso a troca for efetuada com sucesso *************REVER
 	public void alteraPokePrincipal (int indexPoke) {
 		if (pokes[indexPoke].isAlive == true) { //criar metodo para retornar isAlive, quando mudar para private
 			int [] vecInt = {};
-			Pokemon e = new Pokemon("","", 1, vecInt); //aqui deveria ser static, mas o eclipse nao aceita (?)
+			Pokemon e = new Pokemon("","", 1, vecInt);
 			e = pokes[0];
 			pokes[0] = pokes[indexPoke];
 			pokes[indexPoke] = e;
 			
 		}
+	}
+	
+	public int numPokesVivos () {
+		int numAlive = 0;
+		for (int i = 0; i < index-1; i++){
+			if (pokes[i].isAlive){
+				numAlive++;
+			}
+		}
+		return numAlive;
 	}
 }
