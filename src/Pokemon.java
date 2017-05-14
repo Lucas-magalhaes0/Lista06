@@ -58,7 +58,7 @@ public class Pokemon {
 			for (int i = 0; i < a.getPokeN(); i++)
 				if (a.pokes[i].isAlive && a.pokes[i].pVida < 50){
 					a.useItem(i, 0);
-					System.out.println("O treinador " + a.nome + " curou o seu pokemon" + a.pokes[i].nome);
+					System.out.println("O treinador " + a.nome + " curou o seu pokemon " + a.pokes[i].nome);
 				}
 		}
 		
@@ -91,17 +91,21 @@ public class Pokemon {
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
+			
+			//gera movimento aleatorio
 			int randomMove = RandomGenerator.nextInt(4);
 			switch(randomMove){
-				case(0) : Ash.moveUp();
-				case(1) : Ash.moveDown();
-				case(2) : Ash.moveRight();
-				case(3) : Ash.moveLeft();
+				case(0) : Ash.moveUp(); break;
+				case(1) : Ash.moveDown(); break;
+				case(2) : Ash.moveRight(); break;
+				case(3) : Ash.moveLeft(); break;
 			}
 			map.printMap(Ash.getPosition());
-			int randomPokemonSelvagemAparece = RandomGenerator.nextInt(100);
+			
+			
 			
 			/*checa a probabilidade de aparecer um pokemon no mapa*/
+			int randomPokemonSelvagemAparece = RandomGenerator.nextInt(100);
 			int [] vec = Ash.getPosition();
 			if(map.mapa[vec[0]][vec[1]] == 0) {
 				Ash = tentaCurarPokeDoTreinador(Ash);// 0 eh equivalente a nao-grama. Entao nao ha probabilidade de aparecer pokemon

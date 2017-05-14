@@ -47,21 +47,24 @@ public class EventBattle {
 			return;
 		}
 		
-		/* se correr for uma acao a ser escolhida (adicionar boolean correu= false na classe Treinador)
-		if (a.pokes[0].pVida <= 5) { //pensar em formas melhores de decidir correr
-			correr(a);
-			return;
+		//chance de fugir da batalha
+		if(a.pokes[0].pVida <= 40) {
+			if(randomInt>1 && randomInt<70 && a.numPokesVivos()==1 && b.pokes[0].pVida >= 50) {//mudar para 50
+				addTurno1(h. new FugirDaBatalha());
+				return;
+			}
 		}
-		*/
 		
-		if(a.pokes[0].pVida < 15){
+		
+		if(a.pokes[0].pVida <= 15){
 			if(randomInt>1 && randomInt<50)
 				addTurno1(h. new UsarItem());
 			else
 				addTurno1(h. new Atacar(randomAtq));
 			return;
 		}
-		if(a.pokes[0].pVida <= 40 && a.pokes[0].pVida >= 15){
+		
+		if(a.pokes[0].pVida<=40 && a.pokes[0].pVida>15){
 			if(randomInt<50 && randomInt>1)
 				if(a.pokes[randomPoke].isAlive && randomPoke != 0)
 					addTurno1(h. new TrocarPokemon(randomPoke));
@@ -84,14 +87,16 @@ public class EventBattle {
 			return;
 		}
 		
-		/*se correr for uma acao a ser escolhida (adicionar boolean correu= false na classe Treinador)
-		if (a.pokes[0].pVida <= 50) { //pensar em formas melhores de decidir correr
-			correr(a);
-			return;
+		//chance de fugir da batalha
+		if(a.pokes[0].pVida <= 40) { 
+			if(randomInt>1 && randomInt<70 && a.numPokesVivos()==1 && b.pokes[0].pVida>=50){
+				addTurno2(h. new FugirDaBatalha());
+				return;
+			}
 		}
-		*/
 		
-		if(a.pokes[0].pVida < 15){
+		
+		if(a.pokes[0].pVida <= 15){
 			if(randomInt>1 && randomInt<50)
 				addTurno2(h. new UsarItem());
 			else
@@ -99,8 +104,8 @@ public class EventBattle {
 			return;
 		}
 		
-		if(a.pokes[0].pVida <= 40 && a.pokes[0].pVida >= 15){
-			if(randomInt<50 && randomInt>1)
+		if(a.pokes[0].pVida <= 40 && a.pokes[0].pVida > 15){
+			if(randomInt<60 && randomInt>1)
 				if(a.pokes[randomPoke].isAlive && randomPoke != 0)
 					addTurno2(h. new TrocarPokemon(randomPoke));
 				else	
@@ -113,14 +118,6 @@ public class EventBattle {
 	}
 	
 	
-	//metodo correr. Caso necessario, alterar retorno como treinador
-	public void correr (Treinador x) {
-		if (x.ehTreinador)
-			System.out.println("O treinador " + x.nome + " fugiu da batalha");
-		else
-			System.out.println("O Pokemon selvagem" + x.pokes[0].nome + " fugiu da batalha");
-	}
-	
 	public void run(Treinador a, Treinador b){
 		TurnoDaBatalha e1,e2;
 		int rodada = 1;
@@ -129,15 +126,15 @@ public class EventBattle {
 			escolheAcao1(a,b);
 			escolheAcao2(b,a);
 			
-			/* caso correr esteja dentro de escolheAcao (adicionar boolean correu= false na classe Treinador)
-			if (a.correu || b.correu) {
-				break;
-			}
-			*/
 			
 			e1 = Luta.proxTurnoJogador1();
 			e2 = Luta.proxTurnoJogador2();
 			if(Luta.comparaPrioridades()){
+				if(e1.fugiu){
+					System.out.println("opt 1: " + a.nome + " " + a.pokes[0].nome);
+					a = e1.action(a, b);
+					break;
+				}
 				if(e1.atacou)
 					b = e1.action(a, b);
 				else
@@ -154,6 +151,11 @@ public class EventBattle {
 					break;
 			}
 			else {
+				if(e2.fugiu){
+					System.out.println("opt 2" + b.nome + " " + b.pokes[0].nome);
+					b = e2.action(b, a);
+					break;
+				}
 				if(e2.atacou)
 					a = e2.action(b, a);
 				else
@@ -172,7 +174,7 @@ public class EventBattle {
 			
 			
 			/* printa informacoes sobre o jogador e seus pokemons */
-			System.out.println("     Resultados da rodada");
+			System.out.println("\nResultados da rodada");
 			if (a.ehTreinador) 
 				System.out.print("Treinador: " + a.nome + " | Pokemons: ");
 			else
@@ -207,23 +209,9 @@ public class EventBattle {
 						break;
 					}
 				}
-			
-			//corre da batalha
-			if (a.pokes[0].pVida <= 30 && a.numPokesVivos() > 1) { //pensar em formas melhores de decidir correr
-				correr(a);
-				break;
-			}
-			
-			if (b.pokes[0].pVida <= 30 && b.numPokesVivos() > 1) { //pensar em formas melhores de decidir correr
-				correr(a);
-				break;
-			}
-			
 			System.out.println("");
 		}
 		
-		//a.correu = false;
-		//b.correu = false;
 			
 		if (!a.estaNoJogo()) {
 			if (a.ehTreinador)

@@ -1,6 +1,6 @@
 
 public class TreinadorEsqueleto {
-	int [] position = new int[2];
+	int [] position = new int[3];
 	int ladoMapa;//limite lado mapa
 	
 	public void setPosition (int x, int y, int ladoMapa){ 
@@ -10,19 +10,20 @@ public class TreinadorEsqueleto {
 	}
 	public void moveUp (){
 		if (position[0] > 0 )
-			position[0] = position[0]-1;
+			this.position[0]--;
 	}
 	public void moveDown (){
-		if (position[0] < ladoMapa )
-			position[0] = position[0]+1;
+		if (position[0] < ladoMapa-1 )
+			this.position[0]++;
+		
 	}
 	public void moveLeft (){
 		if (position[1] > 0)
-			position[1] = position[1]-1;
+			this.position[1]--;
 	}
 	public void moveRight (){
-		if (position[1] < ladoMapa)
-			position[1] = position[1]+1;
+		if (position[1] < ladoMapa-1)
+			this.position[1]++;
 	}
 	
 	public int [] getPosition (){

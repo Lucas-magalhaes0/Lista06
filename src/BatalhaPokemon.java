@@ -3,7 +3,7 @@ public class BatalhaPokemon extends EventBattle {
 	 class Atacar extends TurnoDaBatalha{
 		int ataqueIndice;
 		Atacar(int i){
-			super(Banco.atkPrioridade[i],true);
+			super(Banco.atkPrioridade[i],true,false);
 			ataqueIndice = i;
 		}
 		public Treinador action(Treinador a, Treinador b){
@@ -25,7 +25,7 @@ public class BatalhaPokemon extends EventBattle {
 	}
 	 class UsarItem extends TurnoDaBatalha{
 		UsarItem(){
-			super(3,false);
+			super(3,false,false);
 		}
 		public Treinador action(Treinador a, Treinador b){
 			a.useItem(0, 0);
@@ -41,7 +41,7 @@ public class BatalhaPokemon extends EventBattle {
 	 class TrocarPokemon extends TurnoDaBatalha{
 		 int index;
 		 TrocarPokemon(int i){
-			 super(3,false);
+			 super(3,false,false);
 			 index = i;
 		 }
 		 public Treinador action(Treinador a, Treinador b) {
@@ -49,7 +49,27 @@ public class BatalhaPokemon extends EventBattle {
 			 return a;
 		 }
 		 public void descricao(Treinador a, Treinador b){
-			 System.out.println("O treinador "+a.nome+" trocou o seu pokemon "+a.pokes[index]+ " pelo pokemon " +a.pokes[0].nome);
+			 System.out.println("O treinador "+a.nome+" trocou o seu pokemon "+ a.pokes[index] + " pelo pokemon " +a.pokes[0].nome);
 		 }
+	 }
+	 
+	//metodo fugir. Caso necessario, alterar retorno como treinador
+	 class FugirDaBatalha extends TurnoDaBatalha {	
+		FugirDaBatalha(){
+			super(4,false,true); //maxima prioridade
+		}
+		
+		public Treinador action (Treinador a, Treinador b){
+			descricao(a, b);
+			
+			return a;
+		}
+		
+		public void descricao (Treinador a, Treinador b){
+			if (a.ehTreinador)
+				System.out.println("O treinador " + a.nome + " fugiu da batalha");
+			else
+				System.out.println("O Pokemon selvagem " + a.pokes[0].nome + " fugiu da batalha");
+		}
 	 }
 }

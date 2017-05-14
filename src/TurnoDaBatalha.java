@@ -2,7 +2,9 @@
 abstract public class TurnoDaBatalha {
 	int prioridade;
 	protected boolean atacou;
-	TurnoDaBatalha(int i, boolean j){
+	protected boolean fugiu;
+	TurnoDaBatalha(int i, boolean j, boolean k){
+		fugiu = k;
 		atacou = j;
 		prioridade = i;
 	}

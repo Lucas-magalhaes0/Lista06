@@ -50,7 +50,7 @@ public class Treinador extends TreinadorEsqueleto {
 	}
 	
 		
-	//alterar pokemon principal. Retorna true caso a troca for efetuada com sucesso *************REVER
+	//alterar pokemon principal
 	public void alteraPokePrincipal (int indexPoke) {
 		if (pokes[indexPoke].isAlive == true) { //criar metodo para retornar isAlive, quando mudar para private
 			int [] vecInt = {};
@@ -64,7 +64,8 @@ public class Treinador extends TreinadorEsqueleto {
 	
 	public int numPokesVivos () {
 		int numAlive = 0;
-		for (int i = 0; i < index-1; i++){
+		
+		for (int i = 0; i < index; i++){
 			if (pokes[i].isAlive){
 				numAlive++;
 			}
