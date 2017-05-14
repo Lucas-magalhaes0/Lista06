@@ -50,6 +50,21 @@ public class Pokemon {
 		
 	}
 	
+	public static Treinador tentaCurarPokeDoTreinador (Treinador a) {
+		Random RandomGenerator = new Random();
+		int chanceCura = RandomGenerator.nextInt(100);
+		
+		if (chanceCura < 70) { //chance de cura de 70%
+			for (int i = 0; i < a.getPokeN(); i++)
+				if (a.pokes[i].isAlive && a.pokes[i].pVida < 50){
+					a.useItem(i, 0);
+					System.out.println("O treinador " + a.nome + " curou o seu pokemon" + a.pokes[i].nome);
+				}
+		}
+		
+		return a;
+	}
+	
 	public static void main (String [] args) {
 		EventBattle gc = new EventBattle();
 		Treinador Ash = new Treinador("Ash",true);
@@ -60,16 +75,16 @@ public class Pokemon {
 					new Pokemon("Pikachu","Pedra",100,v),
 					new Pokemon("Pipilupi","Tesoura",150,v),
 					new Pokemon("Pipilupi","Tesoura",150,v)
-					
-					
 			};
+		
 		MapaPokemon map = new MapaPokemon();
-		map.setMap();
-		Ash.setPosition(10, 10);
+		map.setMap(20); //define 20 como sendo o lado do mapa
+		Ash.setPosition(10, 10, 20); //x,y, lado maximo do mapa
 		Ash.addPoke(poke[0]);
 		Ash.addItens(0);
 		Ash.addPoke(poke[2]);
 		Random RandomGenerator = new Random();
+		
 		while(Ash.estaNoJogo()){
 			try {
 			    Thread.sleep(1000);                 //1000 milliseconds is one second.
@@ -85,8 +100,20 @@ public class Pokemon {
 			}
 			map.printMap(Ash.getPosition());
 			int randomPokemonSelvagemAparece = RandomGenerator.nextInt(100);
-			if(randomPokemonSelvagemAparece < 70)
+			
+			/*checa a probabilidade de aparecer um pokemon no mapa*/
+			int [] vec = Ash.getPosition();
+			if(map.mapa[vec[0]][vec[1]] == 0) {
+				Ash = tentaCurarPokeDoTreinador(Ash);// 0 eh equivalente a nao-grama. Entao nao ha probabilidade de aparecer pokemon
 				continue;
+			}
+			if (randomPokemonSelvagemAparece < 50) {
+				Ash = tentaCurarPokeDoTreinador(Ash);//50% de chance de aparecer um pokemon selvagem caso o mapa contenha o valor 1
+				continue;
+			}
+			
+			/*gera um pokemon aleatorio para aparecer no mapa e inicia a batalha*/
+			
 			int randomPokes = RandomGenerator.nextInt(Banco.pokes.length);
 			Treinador PokemonSelvagem = new Treinador("",false);
 			PokemonSelvagem.addPoke(Banco.pokes[randomPokes]);

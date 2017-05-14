@@ -1,31 +1,44 @@
 import java.util.Random;
 
 public class MapaPokemon {
-	
-	public int[][] setMap(){
-		int[][] Map = new int[20][20];
+	int [][] mapa;
+	int ladoMapa;
+	public void setMap(int ladoMapa){
+		mapa = new int[ladoMapa][ladoMapa];
 		Random randomGenerator = new Random();
+		this.ladoMapa = ladoMapa;
 		
-		
-		for(int i=0; i<20; i++){
-			for(int j=0; j<20; j++){
-				int random = randomGenerator.nextInt(1);
-				Map[i][j] = random;
-				
+		for(int i=0; i<ladoMapa; i++){
+			for(int j=0; j<ladoMapa; j++){
+				int random = randomGenerator.nextInt(2);
+				mapa[i][j] = random;
 			}
 		}
-		return Map;
 	}
+	
 	public void printMap(int[] playerPosition){
-		for(int i=0; i<20; i++){
-			for(int j=0; j<20; j++){
+		System.out.print(" ");
+		for(int bordaSup = 0; bordaSup < ladoMapa; bordaSup++)
+			System.out.print("___");
+		System.out.println("");
+		
+		for(int i=0; i<ladoMapa; i++){
+			System.out.print("|");
+			for(int j=0; j<ladoMapa; j++){
 				if(i == playerPosition[0] && j == playerPosition[1])
 					System.out.print(" P ");
-				else
+				else if (mapa[i][j] == 1)
 					System.out.print(" * ");
+				else
+					System.out.print("   ");
 			}
-			System.out.println("");
+			System.out.println("|");
 		}
+		
+		System.out.print("|");
+		for(int bordaInf = 0; bordaInf < 20; bordaInf++)
+			System.out.print("___");
+		System.out.println("|");
 	}
 	
 	

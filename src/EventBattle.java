@@ -54,7 +54,7 @@ public class EventBattle {
 		}
 		*/
 		
-		if(a.pokes[0].pVida < 55){
+		if(a.pokes[0].pVida < 15){
 			if(randomInt>1 && randomInt<50)
 				addTurno1(h. new UsarItem());
 			else
