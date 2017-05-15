@@ -88,8 +88,14 @@ public class EventBattle {
 		}
 		
 		//chance de fugir da batalha
-		if(a.pokes[0].pVida <= 40) { 
+		if(a.pokes[0].pVida <= 40 && a.nome.compareTo("Ash")==0) { //mudar para 40
 			if(randomInt>1 && randomInt<70 && a.numPokesVivos()==1 && b.pokes[0].pVida>=50){
+				addTurno2(h. new FugirDaBatalha());
+				return;
+			}
+		}
+		else if (a.pokes[0].pVida <= 20){
+			if(randomInt>1 && randomInt<40 && a.numPokesVivos()==1 && b.pokes[0].pVida>=50){
 				addTurno2(h. new FugirDaBatalha());
 				return;
 			}

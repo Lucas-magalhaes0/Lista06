@@ -103,6 +103,7 @@ public class Pokemon {
 		Ash.addPoke(poke[0]);
 		Ash.addPoke(poke[1]);
 		Ash.addPoke(poke[6]);
+		Ash.addPoke(poke[3]);
 		Ash.addItens(0);
 		Random RandomGenerator = new Random();
 		
@@ -120,6 +121,7 @@ public class Pokemon {
 			int j = 2;
 			players[i].addPoke(poke[j]);
 			players[i].addPoke(poke[j+1]);
+			players[i].addItens(0);
 			j+=2;
 		}
 		
@@ -133,15 +135,11 @@ public class Pokemon {
 		
 		while(Ash.estaNoJogo()){
 			try {
-			    Thread.sleep(1000);                 //1000 milliseconds is one second.
+			    Thread.sleep(100);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
 			
-			for (int k=0; k<6; k++){
-				if (Ash.position[0] == players[k].position[0] && Ash.position[1] == players[k].position[1] && players[k].estaNoJogo())
-					gc.run(Ash, players[k]);
-			}
 			
 			//gera movimento aleatorio
 			int randomMove = RandomGenerator.nextInt(4);
@@ -151,8 +149,14 @@ public class Pokemon {
 				case(2) : Ash.moveRight(); break;
 				case(3) : Ash.moveLeft(); break;
 			}
+			
 			map.printMap(Ash.getPosition(), players);
 			
+			//checa possiveis batalhas contra outros players
+			for (int k=0; k<6; k++){
+				if (Ash.position[0] == players[k].position[0] && Ash.position[1] == players[k].position[1] && players[k].estaNoJogo())
+					gc.run(Ash, players[k]);
+			}
 			
 			
 			/*checa a probabilidade de aparecer um pokemon no mapa*/
