@@ -1,4 +1,10 @@
-
+/* Disciplina MAC0321 - 2017
+ * Escola Politecnica - USP
+ * 
+ * Lucas Magalhaes Cordeiro
+ * Rafael Cabral Pili
+ * 
+ */
 public class Item {
 	private String nome;
 	private int valCura;

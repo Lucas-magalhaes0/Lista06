@@ -1,3 +1,10 @@
+/* Disciplina MAC0321 - 2017
+ * Escola Politecnica - USP
+ * 
+ * Lucas Magalhaes Cordeiro
+ * Rafael Cabral Pili
+ * 
+ */
 import java.util.Random;
 
 public class MapaPokemon {

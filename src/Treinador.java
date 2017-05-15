@@ -1,3 +1,10 @@
+/* Disciplina MAC0321 - 2017
+ * Escola Politecnica - USP
+ * 
+ * Lucas Magalhaes Cordeiro
+ * Rafael Cabral Pili
+ * 
+ */
 
 public class Treinador extends TreinadorEsqueleto {
 	String nome;	

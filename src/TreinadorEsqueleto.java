@@ -1,4 +1,10 @@
-
+/* Disciplina MAC0321 - 2017
+ * Escola Politecnica - USP
+ * 
+ * Lucas Magalhaes Cordeiro
+ * Rafael Cabral Pili
+ * 
+ */
 public class TreinadorEsqueleto {
 	int [] position = new int[3];
 	int ladoMapa;//limite lado mapa

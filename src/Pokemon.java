@@ -1,3 +1,11 @@
+/* Disciplina MAC0321 - 2017
+ * Escola Politecnica - USP
+ * 
+ * Lucas Magalhaes Cordeiro
+ * Rafael Cabral Pili
+ * 
+ */
+
 import java.util.Random;
 public class Pokemon {
 	final Banco bank = new Banco ();
@@ -137,6 +145,9 @@ public class Pokemon {
 		players[3].setPosition(5, 6, ladoMapa);
 		players[4].setPosition(7, 7, ladoMapa);
 		players[5].setPosition(9, 1, ladoMapa);
+		
+		
+		System.out.println("***************** POKEMON ******************");
 		
 		while(Ash.estaNoJogo()){
 			try {

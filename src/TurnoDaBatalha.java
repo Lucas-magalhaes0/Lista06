@@ -1,4 +1,10 @@
-
+/* Disciplina MAC0321 - 2017
+ * Escola Politecnica - USP
+ * 
+ * Lucas Magalhaes Cordeiro
+ * Rafael Cabral Pili
+ * 
+ */
 abstract public class TurnoDaBatalha {
 	int prioridade;
 	protected boolean atacou;
