@@ -33,7 +33,7 @@ public class MapaPokemon {
 					continue;
 				}
 				for (int k=0; k<6;k++){
-					if (i == (players[k]).position[0] && j == (players[k]).position[1] && players[k].estaNoJogo()) {
+					if (i == players[k].position[0] && j == players[k].position[1] && players[k].estaNoJogo()) {
 						System.out.print(" P ");
 						q=k;
 						break;
@@ -51,9 +51,9 @@ public class MapaPokemon {
 		}
 		
 		System.out.print("|");
-		for(int bordaInf = 0; bordaInf < 20; bordaInf++)
+		for(int bordaInf = 0; bordaInf < ladoMapa; bordaInf++)
 			System.out.print("___");
-		System.out.println("|");
+		System.out.println("|\n");
 	}
 	
 	

@@ -21,8 +21,8 @@ final class Banco {
 	
 	final static Pokemon [] pokes = {
 			new Pokemon (nomePoke[0], tipoHab[0], 130, v1 ),
-			new Pokemon (nomePoke[1], tipoHab[2], 200, v2 ),
-			new Pokemon (nomePoke[2], tipoHab[0], 230, v3 ),
+			new Pokemon (nomePoke[1], tipoHab[2], 160, v2 ),
+			new Pokemon (nomePoke[2], tipoHab[0], 180, v3 ),
 			new Pokemon (nomePoke[3], tipoHab[1], 100, v4 ),
 			new Pokemon (nomePoke[4], tipoHab[2], 90, v5 ),
 			new Pokemon (nomePoke[5], tipoHab[2], 140, v6 ),

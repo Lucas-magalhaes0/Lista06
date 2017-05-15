@@ -48,8 +48,14 @@ public class EventBattle {
 		}
 		
 		//chance de fugir da batalha
-		if(a.pokes[0].pVida <= 40) {
-			if(randomInt>1 && randomInt<70 && a.numPokesVivos()==1 && b.pokes[0].pVida >= 50) {//mudar para 50
+		if(a.pokes[0].pVida <= 40 && a.nome.compareTo("Ash")==0) { //mudar para 40
+			if(randomInt>1 && randomInt<70 && a.numPokesVivos()==1 && b.pokes[0].pVida>=50){
+				addTurno1(h. new FugirDaBatalha());
+				return;
+			}
+		}
+		else if (a.pokes[0].pVida <= 20){
+			if(randomInt>1 && randomInt<40 && a.numPokesVivos()==1 && b.pokes[0].pVida>=50){
 				addTurno1(h. new FugirDaBatalha());
 				return;
 			}
@@ -128,13 +134,13 @@ public class EventBattle {
 		TurnoDaBatalha e1,e2;
 		int rodada = 1;
 		while(a.estaNoJogo() && b.estaNoJogo()){
-			/*
+			
 			try {
 			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-			*/
+			
 			
 			System.out.println("Rodada: " +rodada++);
 			escolheAcao1(a,b);
@@ -184,13 +190,13 @@ public class EventBattle {
 					break;
 			}
 			
-			/*
+			
 			try {
 			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-			*/
+			
 			
 			/* printa informacoes sobre o jogador e seus pokemons */
 			System.out.println("\nResultados da rodada");

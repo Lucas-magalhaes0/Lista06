@@ -92,7 +92,11 @@ public class Pokemon {
 					new Pokemon ("Rato", "Pedra", 130, v2 ),
 					new Pokemon ("Sapo voador", "Papel", 130, v3 ),
 					new Pokemon ("Minhoca alada", "Tesoura", 100, v4 ),
-					new Pokemon ("Cerbezourus", "Papel", 90, v5 )	
+					new Pokemon ("Cerbezourus", "Papel", 90, v5 ),
+					new Pokemon ("Minhoca alada", "Tesoura", 100, v4 ),
+					new Pokemon ("Cerbezourus", "Papel", 90, v5 ),	
+					new Pokemon ("Serpente vulcanica", "Pedra", 140, v6 ),
+					new Pokemon ("Pombo", "Tesoura", 170, v7 )
 			};
 		
 		MapaPokemon map = new MapaPokemon();
@@ -102,8 +106,10 @@ public class Pokemon {
 		Ash.setPosition(6, 6, ladoMapa); //x,y, lado maximo do mapa
 		Ash.addPoke(poke[0]);
 		Ash.addPoke(poke[1]);
-		Ash.addPoke(poke[6]);
-		Ash.addPoke(poke[3]);
+		Ash.addPoke(poke[14]);
+		Ash.addPoke(poke[15]);
+		Ash.addPoke(poke[16]);
+		Ash.addPoke(poke[17]);
 		Ash.addItens(0);
 		Random RandomGenerator = new Random();
 		
@@ -117,8 +123,8 @@ public class Pokemon {
 				new Treinador("Isild",true),
 		};
 		
+		int j = 2;
 		for (int i=0; i<6; i++){
-			int j = 2;
 			players[i].addPoke(poke[j]);
 			players[i].addPoke(poke[j+1]);
 			players[i].addItens(0);
@@ -126,21 +132,19 @@ public class Pokemon {
 		}
 		
 		players[0].setPosition(1, 2, ladoMapa);
-		players[1].setPosition(8, 5, ladoMapa);
+		players[1].setPosition(11, 9, ladoMapa);
 		players[2].setPosition(6, 4, ladoMapa);
-		players[3].setPosition(3, 6, ladoMapa);
+		players[3].setPosition(5, 6, ladoMapa);
 		players[4].setPosition(7, 7, ladoMapa);
 		players[5].setPosition(9, 1, ladoMapa);
-			
 		
 		while(Ash.estaNoJogo()){
 			try {
-			    Thread.sleep(100);                 //1000 milliseconds is one second.
+			    Thread.sleep(300);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
-			
-			
+
 			//gera movimento aleatorio
 			int randomMove = RandomGenerator.nextInt(4);
 			switch(randomMove){
@@ -151,6 +155,7 @@ public class Pokemon {
 			}
 			
 			map.printMap(Ash.getPosition(), players);
+			
 			
 			//checa possiveis batalhas contra outros players
 			for (int k=0; k<6; k++){
@@ -176,6 +181,7 @@ public class Pokemon {
 			int randomPokes = RandomGenerator.nextInt(Banco.pokes.length);
 			Treinador PokemonSelvagem = new Treinador("",false);
 			PokemonSelvagem.addPoke(Banco.pokes[randomPokes]);
+			PokemonSelvagem.addItens(0);
 			gc.run(Ash, PokemonSelvagem);
 			
 			
