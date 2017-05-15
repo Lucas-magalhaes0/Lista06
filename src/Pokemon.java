@@ -69,27 +69,78 @@ public class Pokemon {
 		EventBattle gc = new EventBattle();
 		Treinador Ash = new Treinador("Ash",true);
 		int v[] = {1, 2, 3};
+		int v1 [] = {1,2,3,4};
+		int v2 [] = {1,7,5,4};
+		int v3 [] = {0,3,5,2};
+		int v4 [] = {1,2,3,7};
+		int v5 [] = {1,6,2,8};
+		int v6 [] = {1,2,4,6};
+		int v7 [] = {5,2,4,6};
+		int v8 [] = {7,8,4,6};
 		Pokemon [] poke =
 			{
 					new Pokemon("Pikachu","Pedra",100,v),
-					new Pokemon("Pikachu","Pedra",100,v),
 					new Pokemon("Pipilupi","Tesoura",150,v),
-					new Pokemon("Pipilupi","Tesoura",150,v)
+					new Pokemon ("Pernilongo", "Papel", 130, v1 ),
+					new Pokemon ("Rato", "Pedra", 130, v2 ),
+					new Pokemon ("Sapo voador", "Papel", 140, v3 ),
+					new Pokemon ("Minhoca alada", "Tesoura", 100, v4 ),
+					new Pokemon ("Cerbezourus", "Papel", 90, v5 ),
+					new Pokemon ("Serpente vulcanica", "Pedra", 140, v6 ),
+					new Pokemon ("Pombo", "Tesoura", 170, v7 ),
+					new Pokemon ("Peixe cachorro", "Pedra", 150, v8 ),
+					new Pokemon ("Rato", "Pedra", 130, v2 ),
+					new Pokemon ("Sapo voador", "Papel", 130, v3 ),
+					new Pokemon ("Minhoca alada", "Tesoura", 100, v4 ),
+					new Pokemon ("Cerbezourus", "Papel", 90, v5 )	
 			};
 		
 		MapaPokemon map = new MapaPokemon();
-		map.setMap(20); //define 20 como sendo o lado do mapa
-		Ash.setPosition(10, 10, 20); //x,y, lado maximo do mapa
+		int ladoMapa = 12;//define 12 como sendo o lado do mapa
+		
+		map.setMap(ladoMapa); 
+		Ash.setPosition(6, 6, ladoMapa); //x,y, lado maximo do mapa
 		Ash.addPoke(poke[0]);
+		Ash.addPoke(poke[1]);
+		Ash.addPoke(poke[6]);
 		Ash.addItens(0);
-		Ash.addPoke(poke[2]);
 		Random RandomGenerator = new Random();
+		
+		/*gerador de players aleatorios no mapa*/
+		Treinador [] players = {
+				new Treinador("Trash",true),
+				new Treinador("Joseph",true),
+				new Treinador("Michael",true),
+				new Treinador("Lila",true),
+				new Treinador("Mew",true),
+				new Treinador("Isild",true),
+		};
+		
+		for (int i=0; i<6; i++){
+			int j = 2;
+			players[i].addPoke(poke[j]);
+			players[i].addPoke(poke[j+1]);
+			j+=2;
+		}
+		
+		players[0].setPosition(1, 2, ladoMapa);
+		players[1].setPosition(8, 5, ladoMapa);
+		players[2].setPosition(6, 4, ladoMapa);
+		players[3].setPosition(3, 6, ladoMapa);
+		players[4].setPosition(7, 7, ladoMapa);
+		players[5].setPosition(9, 1, ladoMapa);
+			
 		
 		while(Ash.estaNoJogo()){
 			try {
 			    Thread.sleep(1000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
+			}
+			
+			for (int k=0; k<6; k++){
+				if (Ash.position[0] == players[k].position[0] && Ash.position[1] == players[k].position[1] && players[k].estaNoJogo())
+					gc.run(Ash, players[k]);
 			}
 			
 			//gera movimento aleatorio
@@ -100,7 +151,7 @@ public class Pokemon {
 				case(2) : Ash.moveRight(); break;
 				case(3) : Ash.moveLeft(); break;
 			}
-			map.printMap(Ash.getPosition());
+			map.printMap(Ash.getPosition(), players);
 			
 			
 			

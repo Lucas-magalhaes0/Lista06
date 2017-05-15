@@ -122,6 +122,14 @@ public class EventBattle {
 		TurnoDaBatalha e1,e2;
 		int rodada = 1;
 		while(a.estaNoJogo() && b.estaNoJogo()){
+			/*
+			try {
+			    Thread.sleep(1000);                 //1000 milliseconds is one second.
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+			*/
+			
 			System.out.println("Rodada: " +rodada++);
 			escolheAcao1(a,b);
 			escolheAcao2(b,a);
@@ -131,7 +139,6 @@ public class EventBattle {
 			e2 = Luta.proxTurnoJogador2();
 			if(Luta.comparaPrioridades()){
 				if(e1.fugiu){
-					System.out.println("opt 1: " + a.nome + " " + a.pokes[0].nome);
 					a = e1.action(a, b);
 					break;
 				}
@@ -152,7 +159,6 @@ public class EventBattle {
 			}
 			else {
 				if(e2.fugiu){
-					System.out.println("opt 2" + b.nome + " " + b.pokes[0].nome);
 					b = e2.action(b, a);
 					break;
 				}
@@ -172,6 +178,13 @@ public class EventBattle {
 					break;
 			}
 			
+			/*
+			try {
+			    Thread.sleep(1000);                 //1000 milliseconds is one second.
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+			*/
 			
 			/* printa informacoes sobre o jogador e seus pokemons */
 			System.out.println("\nResultados da rodada");

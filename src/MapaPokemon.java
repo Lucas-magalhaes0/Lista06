@@ -16,7 +16,7 @@ public class MapaPokemon {
 		}
 	}
 	
-	public void printMap(int[] playerPosition){
+	public void printMap(int[] playerPosition, Treinador[] players){
 		System.out.print(" ");
 		for(int bordaSup = 0; bordaSup < ladoMapa; bordaSup++)
 			System.out.print("___");
@@ -24,13 +24,28 @@ public class MapaPokemon {
 		
 		for(int i=0; i<ladoMapa; i++){
 			System.out.print("|");
+			
 			for(int j=0; j<ladoMapa; j++){
-				if(i == playerPosition[0] && j == playerPosition[1])
+				int q=0;
+				
+				if(i == playerPosition[0] && j == playerPosition[1]){
 					System.out.print("Ash");
+					continue;
+				}
+				for (int k=0; k<6;k++){
+					if (i == (players[k]).position[0] && j == (players[k]).position[1] && players[k].estaNoJogo()) {
+						System.out.print(" P ");
+						q=k;
+						break;
+					}
+				}
+				if (i == (players[q]).position[0] && j == (players[q]).position[1] && players[q].estaNoJogo())
+					continue;
+	
 				else if (mapa[i][j] == 1)
-					System.out.print(" * ");
-				else
-					System.out.print("   ");
+						System.out.print(" * ");
+					else
+						System.out.print("   ");
 			}
 			System.out.println("|");
 		}
